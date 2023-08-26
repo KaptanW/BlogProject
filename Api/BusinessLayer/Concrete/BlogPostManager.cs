@@ -19,6 +19,12 @@ namespace BusinessLayer.Concrete
             this.blogPostDal = blogPostDal;
         }
 
+        public async Task<List<BlogPost>> BlogsWithComments()
+        {
+            var value = await blogPostDal.BlogsWithComments();
+            return value;
+        }
+
         public async Task Delete(BlogPost t)
         {
             await blogPostDal.Delete(t);
@@ -37,6 +43,11 @@ namespace BusinessLayer.Concrete
         public async Task Insert(BlogPost t)
         {
             await blogPostDal.Insert(t);
+        }
+
+        public async Task<List<BlogPost>> SearchBlog(string search)
+        {
+            return await blogPostDal.SearchBlog(search);
         }
 
         public async Task Update(BlogPost t)

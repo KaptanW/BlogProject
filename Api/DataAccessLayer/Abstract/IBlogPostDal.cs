@@ -9,5 +9,8 @@ namespace DataAccessLayer.Abstract
 {
     public interface IBlogPostDal:IGenericDal<BlogPost>
     {
+        Task<List<BlogPost>> BlogsWithComments();
+        Task<List<BlogPost>> SearchBlog(string search);
+       
     }
 }

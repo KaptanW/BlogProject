@@ -12,7 +12,7 @@ namespace DataAccessLayer.Concrete
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("data source=DESKTOP-PRMBC7J;initial catalog=BlogProject;integrated security=True; MultipleActiveResultSets=True;");
+            optionsBuilder.UseSqlServer("data source=DESKTOP-THFGP40;initial catalog=BlogProject;integrated security=True; MultipleActiveResultSets=True;");
         }
 
         public DbSet<BlogPost> Blogs { get; set; }

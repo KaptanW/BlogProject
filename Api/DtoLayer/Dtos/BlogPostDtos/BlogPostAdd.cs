@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EntityLayer.Concrete
+namespace DtoLayer.Dtos.BlogPostDtos
 {
-    public class BlogPost
+    public class BlogPostAdd
     {
         public int Id { get; set; }
 
@@ -17,7 +17,5 @@ namespace EntityLayer.Concrete
         public string Author { get; set; }
 
         public DateTime CreateDate { get; set; } = DateTime.Now;
-
-        public List<BlogPostComments>? blogPostComments { get; set; }
     }
 }

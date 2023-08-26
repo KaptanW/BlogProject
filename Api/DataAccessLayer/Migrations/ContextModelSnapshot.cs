@@ -47,7 +47,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Blogs");
+                    b.ToTable("Blogs", (string)null);
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.BlogPostComments", b =>
@@ -72,7 +72,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasIndex("BlogPostId");
 
-                    b.ToTable("BlogsComments");
+                    b.ToTable("BlogsComments", (string)null);
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.BlogPostComments", b =>

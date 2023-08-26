@@ -9,5 +9,7 @@ namespace BusinessLayer.Abstract
 {
     public interface IBlogPostService : IGenericService<BlogPost>
     {
+        Task<List<BlogPost>> BlogsWithComments();
+        Task<List<BlogPost>> SearchBlog(string search);
     }
 }

@@ -1,8 +1,47 @@
-﻿@{
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+
+@model IPagedList<BlogPost>
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+
+    <div class=" chest">
+        
+    <h1 class="display-3 m-5">Newest Topics</h1>
+    <div class="container">
+        @foreach (var item in Model)
+    {
+        
+        <div class="m-5">
+            <h2 class="display-4">@item.Name</h2>
+            <div class="mx-5 mt-4">
+            @if (!string.IsNullOrEmpty(item.Description))
+            {
+               
+                if (item.Description.Length > 300)
+                {
+                        <p>@item.Description.Substring(0, Math.Min(300, item.Description.Length))<span>...</span></p>
+                    
+                }
+                else
+                {
+                    @item.Description
+                }
+            }
+            <p class="mt-2 opacity-75">Publication Date: @item.CreateDate</p>
+                    <p>Read More</p>
+            </div>
+        </div>
+       
+            <hr class="my-4">
+
+    }
+
+    <div class="pagination-container left m-5">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    </div>
+    </div>
+    </div>
+

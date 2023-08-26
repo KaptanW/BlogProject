@@ -1,52 +1,83 @@
-﻿using BusinessLayer.Abstract;
+﻿using AutoMapper;
+using BusinessLayer.Abstract;
+using DtoLayer.Dtos.BlogPostDtos;
+using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace BlogApi.Controllers
+namespace BlogPostApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class BlogPostController : ControllerBase
     {
-        private readonly IBlogPostService blogPostService;
+        private readonly IBlogPostService _BlogPostService;
 
-        public BlogPostController(IBlogPostService blogPostService)
+        private readonly IMapper mapper;
+
+        public BlogPostController(IBlogPostService BlogPostPostService,IMapper mapper)
         {
-            this.blogPostService = blogPostService;
+            this._BlogPostService = BlogPostPostService;
+            this.mapper = mapper;
         }
 
-        // GET: api/<BlogPostController>
         [HttpGet]
-        public async Task<IActionResult>  GetPosts()
+        public async Task<IActionResult> BlogPostList()
         {
-           var values = await blogPostService.GetList();
-            return Ok(values);
+            var values = await _BlogPostService.BlogsWithComments();
+            var json = JsonConvert.SerializeObject(values,Formatting.Indented, new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
+            return Ok(json);
+        }
+        
+        
+        [HttpGet("BlogPostListWithSearch")]
+        public async Task<IActionResult> BlogPostListWithSearch(string search)
+        {
+            var values = await _BlogPostService.SearchBlog(search);
+            var json = JsonConvert.SerializeObject(values,Formatting.Indented, new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
+            return Ok(json);
         }
 
-        // GET api/<BlogPostController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<BlogPostController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> AddBlogPost(BlogPostAdd BlogPost)
         {
+            var values = mapper.Map<BlogPost>(BlogPost);
+            await _BlogPostService.Insert(values);
+            return Ok();
         }
 
-        // PUT api/<BlogPostController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<BlogPostController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> DeleteBlogPost(int id)
         {
+            var values = await _BlogPostService.GetById(id);
+
+
+            await _BlogPostService.Delete(values);
+
+
+            return Ok();
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateBlogPost(BlogPostAdd BlogPost)
+        {
+            var values = mapper.Map<BlogPost>(BlogPost);
+            await _BlogPostService.Update(values);
+            return Ok();
+        }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetBlogPost(int id)
+        {
+            var value = await _BlogPostService.GetById(id);
+            return Ok(value);
         }
     }
 }

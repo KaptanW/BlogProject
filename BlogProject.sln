@@ -5,17 +5,19 @@ VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{D90F3E52-F5F3-4DFA-8654-D432879AD32C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityLayer", "Api\EntityLayer\EntityLayer.csproj", "{D22CB60C-88D6-4A47-B0B1-7C5857E497C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityLayer", "Api\EntityLayer\EntityLayer.csproj", "{D22CB60C-88D6-4A47-B0B1-7C5857E497C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "Api\DataAccessLayer\DataAccessLayer.csproj", "{C02428B1-E2AD-41BC-8654-F009175D56A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessLayer", "Api\DataAccessLayer\DataAccessLayer.csproj", "{C02428B1-E2AD-41BC-8654-F009175D56A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLayer", "Api\BusinessLayer\BusinessLayer.csproj", "{C364B6CE-5F26-44DB-93E1-528654881E96}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLayer", "Api\BusinessLayer\BusinessLayer.csproj", "{C364B6CE-5F26-44DB-93E1-528654881E96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogApi", "Api\BlogApi\BlogApi.csproj", "{B331B04B-DAF1-4DF6-8E02-F51CC54CEE07}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogApi", "Api\BlogApi\BlogApi.csproj", "{B331B04B-DAF1-4DF6-8E02-F51CC54CEE07}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{8784B870-497F-411E-8481-B6ED59A1270E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogAspNetCore", "Frontend\BlogAspNetCore\BlogAspNetCore.csproj", "{83C2C433-E738-473E-B74D-9D1C38983F59}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogAspNetCore", "Frontend\BlogAspNetCore\BlogAspNetCore.csproj", "{83C2C433-E738-473E-B74D-9D1C38983F59}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DtoLayer", "Api\DtoLayer\DtoLayer.csproj", "{31649838-E246-4E41-99CD-88B58E2F6FA8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,10 @@ Global
 		{83C2C433-E738-473E-B74D-9D1C38983F59}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83C2C433-E738-473E-B74D-9D1C38983F59}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83C2C433-E738-473E-B74D-9D1C38983F59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31649838-E246-4E41-99CD-88B58E2F6FA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31649838-E246-4E41-99CD-88B58E2F6FA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31649838-E246-4E41-99CD-88B58E2F6FA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31649838-E246-4E41-99CD-88B58E2F6FA8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,6 +59,7 @@ Global
 		{C364B6CE-5F26-44DB-93E1-528654881E96} = {D90F3E52-F5F3-4DFA-8654-D432879AD32C}
 		{B331B04B-DAF1-4DF6-8E02-F51CC54CEE07} = {D90F3E52-F5F3-4DFA-8654-D432879AD32C}
 		{83C2C433-E738-473E-B74D-9D1C38983F59} = {8784B870-497F-411E-8481-B6ED59A1270E}
+		{31649838-E246-4E41-99CD-88B58E2F6FA8} = {D90F3E52-F5F3-4DFA-8654-D432879AD32C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3D0860AF-09DE-4FE3-BD65-DC8F8F28E33C}
