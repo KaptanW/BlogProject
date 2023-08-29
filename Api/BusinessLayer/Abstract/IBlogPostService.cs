@@ -11,5 +11,8 @@ namespace BusinessLayer.Abstract
     {
         Task<List<BlogPost>> BlogsWithComments();
         Task<List<BlogPost>> SearchBlog(string search);
+
+        Task<List<BlogPost>> UserBlogPosts(int id);
+        Task<BlogPost> BlogWithMoreDetails(int id);
     }
 }

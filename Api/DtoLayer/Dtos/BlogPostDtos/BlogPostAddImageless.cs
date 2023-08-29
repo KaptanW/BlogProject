@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EntityLayer.Concrete
+namespace DtoLayer.Dtos.BlogPostDtos
 {
-    public class BlogPost
+    public class BlogPostAddImageless
     {
         public int Id { get; set; }
 
@@ -18,15 +18,8 @@ namespace EntityLayer.Concrete
 
         public int AppUserId { get; set; }
 
-        public AppUser AppUser { get; set; }
-
+        public string Image { get; set; }
 
         public DateTime CreateDate { get; set; } = DateTime.Now;
-
-        public List<BlogPostComments>? blogPostComments { get; set; }
-
-        public List<PostTags>? postTags { get; set; }
-
-        public List<BlogPostImages>? BlogPostImages { get; set; }
     }
 }

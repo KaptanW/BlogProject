@@ -1,0 +1,103 @@
+﻿@model BlogAspNetCore.Dtos.CreateaBlog
+@{
+    ViewData["Title"] = "BlogAPost";
+}
+
+
+<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+<div class="container">
+    <h4>Add a Blog</h4>
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="BlogAPost" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label">Title</label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group  mt-3">
+                    <label asp-for="Description" class="control-label">Your Blog</label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div id="imageInputs">
+                    <!-- İlk input alanı -->
+                    <div class="form-group">
+                        <label>Thumbnail</label>
+                        <input type="text" asp-for="Images[0].Image" name="Images[0].Image" class="form-control" />
+                    </div>
+
+                    <button type="button" id="addImageInput" class="btn btn-secondary">New Image</button>
+                </div> 
+                
+                
+                
+                <div id="TagInputs">
+                    <!-- İlk input alanı -->
+                    <div class="form-group">
+                        <label>Tags</label>
+                        <input type="text" asp-for="Tags[0].Tag" name="Tags[0].Tag" class="form-control" />
+                    </div>
+
+                    <button type="button" id="addTagInput" class="btn btn-secondary">New Tag</button>
+                </div>
+
+                <div class="form-group mt-3">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        var imageInputsContainer = $('#imageInputs');
+        var TagInputsContainer = $('#TagInputs');
+        var addImageInputBtn = $('#addImageInput');
+        var addTagInputBtn = $('#addTagInput');
+        var imageInputIndex = 1;
+        var TagInputIndex = 1;
+
+        addImageInputBtn.click(function () {
+            var newInput = `
+                    <div class="form-group">
+                        <label>Image URL</label>
+                                            <input type="text" asp-for="Images[${imageInputIndex}].Image" name="Images[${imageInputIndex}].Image" class="form-control" />
+                                    <button type="button" class="btn btn-danger removeImageInput">Remove</button>
+                    </div>
+                `;
+
+            imageInputsContainer.append(newInput);
+            imageInputIndex++;
+        });
+        imageInputsContainer.on('click', '.removeImageInput', function () {
+            $(this).closest('.form-group').remove();
+        });
+
+        addTagInputBtn.click(function () {
+            var newInput = `
+                    <div class="form-group">
+                        <label>Tag</label>
+                                                        <input type="text" asp-for="Tags[${imageInputIndex}].Tag" name="Tags[${imageInputIndex}].Tag" class="form-control" />
+                                    <button type="button" class="btn btn-danger removeTagInput">Remove</button>
+                    </div>
+                `;
+
+            TagInputsContainer.append(newInput);
+            TagInputIndex++;
+        });
+        TagInputsContainer.on('click', '.removeTagInput', function () {
+            $(this).closest('.form-group').remove();
+        });
+
+
+
+
+
+
+    });
+
+
+</script>

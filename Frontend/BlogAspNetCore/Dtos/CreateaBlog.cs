@@ -1,15 +1,10 @@
-﻿using EntityLayer.Concrete;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DtoLayer.Dtos.BlogPostDtos;
+using EntityLayer.Concrete;
 
-namespace DtoLayer.Dtos.BlogPostDtos
+namespace BlogAspNetCore.Dtos
 {
-    public class BlogPostAdd
+    public class CreateaBlog
     {
-        public int Id { get; set; }
 
         public string Name { get; set; }
 
@@ -23,8 +18,8 @@ namespace DtoLayer.Dtos.BlogPostDtos
         public DateTime CreateDate { get; set; } = DateTime.Now;
 
         public List<AddImage> Images { get; set; }
-
         public List<AddTag> Tags { get; set; }
+
 
     }
 }

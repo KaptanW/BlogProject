@@ -3,8 +3,11 @@ using BusinessLayer.Concrete;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace BlogApi
 {
@@ -25,6 +28,18 @@ namespace BlogApi
                 options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
+            {
+                opt.RequireHttpsMetadata = false;
+                opt.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidIssuer = "https://localhost:7216/",
+                    ValidAudience = "https://localhost:7216/",
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("BlogProjectBlogProject")),
+                    ValidateIssuerSigningKey = true,
+                    ValidateLifetime = true
+                };
+            });
             // Add services to the container.
 
             builder.Services.AddControllers();
@@ -33,7 +48,7 @@ namespace BlogApi
             builder.Services.AddSwaggerGen();
             builder.Services.AddCors(opt =>
             {
-                opt.AddPolicy("BlogProjectApi", opts =>
+                opt.AddPolicy("BlogProjectBlogProject", opts =>
                 {
                     opts.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
                 });
@@ -49,9 +64,10 @@ namespace BlogApi
             }
 
             app.UseHttpsRedirection();
-            app.UseCors("BlogProjectApi");
-            app.UseAuthorization();
+            app.UseCors("BlogProjectBlogProject");
 
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.MapControllers();
 

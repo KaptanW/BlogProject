@@ -29,6 +29,14 @@ body {
     margin-right: 10px;
 }
 
+.navbardrop{
+    font-size:25px;
+}
+
+.navbartext{
+    font-size:34px;
+}
+
 a {
     text-decoration: none !important;
 }
@@ -40,4 +48,8 @@ a {
 
 p{
     font-size:16px
+}
+
+.thumb{
+    height:10%
 }

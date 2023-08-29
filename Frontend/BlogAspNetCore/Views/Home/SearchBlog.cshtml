@@ -1,0 +1,45 @@
+﻿@model List<BlogPost>
+@{
+    ViewData["Title"] = "SearchBlog";
+}
+
+
+<div class=" chest">
+
+    <h1 class="display-3 m-5">Newest Topics</h1>
+    <div class="container">
+        <a class="nav-link active text-light" aria-current="page" href="/Token/Index">Girdim mi</a>
+        @if (Model != null)
+            @foreach (var item in Model)
+            {
+
+                <div class="m-5">
+                    <h2 class="display-4">@item.Name</h2>
+                    <div class="mx-5 mt-4">
+
+                        @if (!string.IsNullOrEmpty(item.Description))
+                        {
+
+                            if (item.Description.Length > 300)
+                            {
+                                <p>@item.Description.Substring(0, Math.Min(300, item.Description.Length))<span>...</span></p>
+
+                            }
+                            else
+                            {
+                                @item.Description
+                            }
+                        }
+                        <p class="mt-2 opacity-75">Publication Date: @item.CreateDate</p>
+                        <a href="/Home/BlogDetails/@item.Id">Read More</a>
+                    </div>
+                </div>
+
+                <hr class="my-4">
+
+            }
+
+    </div>
+</div>
+
+

@@ -1,3 +1,7 @@
+using DataAccessLayer.Concrete;
+using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Identity;
+
 namespace BlogAspNetCore
 {
     public class Program
@@ -9,6 +13,25 @@ namespace BlogAspNetCore
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddHttpClient();
+            builder.Services.AddDbContext<Context>();
+            builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Context>().AddDefaultTokenProviders();
+            builder.Services.ConfigureApplicationCookie(opt =>
+            {
+                var cookiebuilder = new CookieBuilder();
+                cookiebuilder.Name = "BlogCookie";
+                opt.LoginPath = new PathString("/xHome/Login");
+
+                opt.Cookie = cookiebuilder;
+                opt.ExpireTimeSpan = TimeSpan.FromDays(1);
+                opt.SlidingExpiration = true;
+            });
+
+            builder.Services.AddDistributedMemoryCache(); 
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30); 
+                options.Cookie.HttpOnly = true; 
+            });
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -23,7 +46,8 @@ namespace BlogAspNetCore
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseSession();
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(

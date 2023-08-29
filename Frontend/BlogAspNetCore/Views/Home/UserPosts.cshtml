@@ -1,30 +1,28 @@
-﻿@using X.PagedList
-@using X.PagedList.Mvc.Core
-
-@model IPagedList<BlogPost>
+﻿@model List<BlogPost>
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "SearchBlog";
 }
 
 
 <div class=" chest">
 
-    <h1 class="display-3 m-5">Newest Topics</h1>
+    <h1 class="display-3 m-5">@ViewBag.UserName Topics</h1>
     <div class="container">
+        <a class="nav-link active text-light" aria-current="page" href="/Token/Index">Girdim mi</a>
         @if (Model != null)
-
+        
             @foreach (var item in Model)
             {
 
                 <div class="m-5">
                     <div class="row">
-                        @if (item.BlogPostImages != null && item.BlogPostImages.Count > 0)
-                        {
-                            <img class="col-4 thumb" src="@item.BlogPostImages[0].Image" alt="Blog Post Image">
-                        }
-                        <div class="col-8">
+                    @if (item.BlogPostImages != null && item.BlogPostImages.Count > 0)
+                    {
+                        <img class="col-4 thumb" src="@item.BlogPostImages[0].Image" alt="Blog Post Image">
+                    }
+                    <div class="col-8">
 
-                            <h2 class="display-4 col-8">@item.Name</h2>
+                        <h2 class="display-4 col-8">@item.Name</h2>
 
                             @if (!string.IsNullOrEmpty(item.Description))
                             {
@@ -42,20 +40,16 @@
                             <p class="mt-2 opacity-75">Publication Date: @item.CreateDate</p>
                             <p class="mt-2 opacity-75">Creator: @item.AppUser.UserName</p>
                             <a href="/Home/BlogDetails/@item.Id">Read More</a>
-                        </div>
-
-
                     </div>
+                    
+                
+                </div>
                 </div>
 
                 <hr class="my-4">
 
             }
 
-    </div>
-
-    <div class="pagination-container left m-5">
-        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
     </div>
 </div>
 

@@ -25,6 +25,12 @@ namespace BusinessLayer.Concrete
             return value;
         }
 
+        public async Task<BlogPost> BlogWithMoreDetails(int id)
+        {
+            var value = await blogPostDal.BlogWithMoreDetails(id);
+            return value;
+        }
+
         public async Task Delete(BlogPost t)
         {
             await blogPostDal.Delete(t);
@@ -53,6 +59,11 @@ namespace BusinessLayer.Concrete
         public async Task Update(BlogPost t)
         {
             await blogPostDal.Update(t);
+        }
+
+        public async Task<List<BlogPost>> UserBlogPosts(int id)
+        {
+            return await blogPostDal.UserBlogPosts(id);
         }
     }
 }

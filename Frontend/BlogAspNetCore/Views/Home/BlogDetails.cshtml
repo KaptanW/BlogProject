@@ -1,0 +1,30 @@
+﻿@model BlogPost
+@using System.Security.Claims;
+@{
+    ViewData["Title"] = "BlogDetails";
+}
+
+<div class="container">
+     <p class="display-1"> @Model.Name</p>
+    <hr />
+
+    @if (Model.BlogPostImages != null && Model.BlogPostImages.Count > 0)
+    {
+        <img class="thumb" src="@Model.BlogPostImages[0].Image" alt="Blog Post Image">
+    }
+       
+</div>
+<div>
+    @if (User.Identity.IsAuthenticated)
+    {
+        
+    @if (User.IsInRole("Admin") || int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)) == Model.AppUserId)
+    {
+        
+        @Html.ActionLink("Edit", "Edit", new { /*id = Model.PrimaryKey */ })
+        @Html.ActionLink("Delete", "Delete", new { /* id = Model.PrimaryKey */ })
+ 
+        }
+    }
+    <a asp-action="Index">Ana Sayfaya Dön</a>
+</div>

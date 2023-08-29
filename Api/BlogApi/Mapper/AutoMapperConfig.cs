@@ -11,6 +11,8 @@ namespace BlogApi.Mapper
         {
 
             CreateMap<BlogPostAdd, BlogPost>().ReverseMap();
+            CreateMap<BlogPostAdd, BlogPostAddImageless>().ReverseMap();
+            CreateMap<BlogPost, BlogPostAddImageless>().ReverseMap();
             CreateMap<AddBlogPostCommentDto, BlogPostComments>().ReverseMap();
         }
     }
