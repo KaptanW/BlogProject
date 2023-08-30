@@ -19,6 +19,12 @@ namespace BusinessLayer.Concrete
             this.blogPostCommentsDal = blogPostCommentsDal;
         }
 
+        public async Task<List<BlogPostComments>> CommentsforBlog(int id)
+        {
+           var value = await blogPostCommentsDal.CommentsforBlog(id);
+            return value;
+        }
+
         public async Task Delete(BlogPostComments t)
         {
             await blogPostCommentsDal.Delete(t);

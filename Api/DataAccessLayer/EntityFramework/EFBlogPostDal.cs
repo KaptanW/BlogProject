@@ -21,7 +21,13 @@ namespace DataAccessLayer.EntityFramework
         {
             using (var context = new Context())
             {
-                var value = await context.Blogs.AsNoTracking().Include(x => x.blogPostComments).Include(x=>x.AppUser).Include(x=>x.BlogPostImages).Include(x=>x.postTags).OrderByDescending(x=>x.CreateDate).ToListAsync();
+                var value = await context.Blogs
+               .Include(x => x.blogPostComments)
+                 .Include(x => x.AppUser)
+                 .Include(x => x.BlogPostImages)
+                   .Include(x => x.postTags)
+                  .OrderByDescending(x => x.CreateDate)
+                .ToListAsync();
                 return value;
 
             }
@@ -32,7 +38,7 @@ namespace DataAccessLayer.EntityFramework
 
             using (var context = new Context())
             {
-                var value = await context.Blogs.AsNoTracking().Include(x => x.blogPostComments).Include(x => x.AppUser).Include(x => x.BlogPostImages).Include(x => x.postTags).OrderByDescending(x => x.CreateDate).Where(x=>x.Id == id).FirstOrDefaultAsync();
+                var value = await context.Blogs.AsNoTracking().Include(x => x.blogPostComments).ThenInclude(y=>y.User).Include(x => x.AppUser).Include(x => x.BlogPostImages).Include(x => x.postTags).OrderByDescending(x => x.CreateDate).Where(x=>x.Id == id).FirstOrDefaultAsync();
                 return value;
 
             }

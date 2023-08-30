@@ -13,13 +13,28 @@ namespace DataAccessLayer.Concrete
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("data source=DESKTOP-PRMBC7J;initial catalog=BlogProject;integrated security=True; MultipleActiveResultSets=True;");
+            optionsBuilder.UseSqlServer("data source=DESKTOP-THFGP40;initial catalog=BlogProject;integrated security=True; MultipleActiveResultSets=True;");
         }
 
         public DbSet<BlogPost> Blogs { get; set; }
         public DbSet<PostTags> postTags { get; set; }
 
         public DbSet<BlogPostComments> BlogsComments { get; set; }  
-        public DbSet<BlogPostImages> BlogPostImages { get; set; }  
+        public DbSet<BlogPostImages> BlogPostImages { get; set; }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            // BlogComments tablosu için FOREIGN KEY ilişkisini yapılandırma
+            modelBuilder.Entity<BlogPostComments>()
+                .HasOne(bc => bc.User)
+                .WithMany()
+                .HasForeignKey(bc => bc.UserId)
+                .OnDelete(DeleteBehavior.Restrict); // Kısıtlamayı 'NO ACTION' veya 'CASCADE' olarak ayarlayın
+
+            // Diğer FOREIGN KEY ilişkilerini de benzer şekilde yapılandırabilirsiniz.
+        }
     }
 }

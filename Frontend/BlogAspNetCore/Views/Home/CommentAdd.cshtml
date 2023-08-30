@@ -1,0 +1,14 @@
+﻿@model CreateComment
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<div id="yorumYapmaBolumu" style="display: none;">
+    <h1>Make A Comment</h1>
+    <form method="post" asp-action="CommentAdd" asp-controller="Home">
+        <input type="text" asp-for="Comment"  name="Comment" class="w-50 form-control" />
+        <input type="hidden" asp-for="UserId" name="UserId" value="User.FindFirstValue(ClaimTypes.NameIdentifier)" class="form-control" />
+
+        <input type="submit" value="Create" class="my-4 mx-2 btn btn-primary" />
+    </form>
+</div>

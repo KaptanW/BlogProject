@@ -15,5 +15,7 @@ namespace DtoLayer.Dtos.BlogPostCommentDtos
         public DateTime CreateDate { get; set; }
 
         public int BlogPostId { get; set; }
+
+        public int UserId { get; set; }
     }
 }

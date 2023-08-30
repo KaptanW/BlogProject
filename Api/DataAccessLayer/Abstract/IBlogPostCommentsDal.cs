@@ -9,5 +9,6 @@ namespace DataAccessLayer.Abstract
 {
     public interface IBlogPostCommentsDal:IGenericDal<BlogPostComments>
     {
+        Task<List<BlogPostComments>> CommentsforBlog(int id);
     }
 }

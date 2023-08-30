@@ -15,6 +15,8 @@ namespace EntityLayer.Concrete
 
         public List<BlogPost>? Posts { get; set; }
 
+        public List<BlogPostComments>? Comments { get; set; }
+
         public string? ProfileImage { get; set; }
 
     }

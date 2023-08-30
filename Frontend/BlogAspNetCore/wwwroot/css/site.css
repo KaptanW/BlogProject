@@ -53,3 +53,8 @@ p{
 .thumb{
     height:10%
 }
+
+.pp{
+    height: 100px;
+    width: 100px;
+}

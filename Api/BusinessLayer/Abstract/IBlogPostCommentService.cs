@@ -9,5 +9,7 @@ namespace BusinessLayer.Abstract
 {
     public interface IBlogPostCommentService : IGenericService<BlogPostComments>
     {
+
+        Task<List<BlogPostComments>> CommentsforBlog(int id);
     }
 }

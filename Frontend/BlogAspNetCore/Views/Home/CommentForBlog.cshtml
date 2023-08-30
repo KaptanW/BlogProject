@@ -1,0 +1,12 @@
+﻿@model EntityLayer.Concrete.BlogPostComments
+
+<button class="btn btn-info" id="yorumEkleBtn">Add Comment</button>
+
+<!-- Yorum Yapma Bölümü (Başlangıçta gizli) -->
+<div id="yorumYapmaBolumu" style="display: none;">
+    <form method="post"  asp-action="" asp-controller="">
+        <input type="text" asp-for="Comment" name="" class="form-control" />
+
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </form>
+</div>

@@ -18,5 +18,9 @@ namespace EntityLayer.Concrete
         public int BlogPostId { get; set; }
 
         public BlogPost BlogPost { get; set; }
+
+        public int UserId { get; set; }
+
+        public AppUser User { get; set; }
     }
 }

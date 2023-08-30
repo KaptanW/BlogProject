@@ -4,27 +4,90 @@
     ViewData["Title"] = "BlogDetails";
 }
 
+<style>
+    .display-1 {
+        text-align: center; /* Metni merkeze hizalama */
+    }
+
+</style>
+
 <div class="container">
      <p class="display-1"> @Model.Name</p>
     <hr />
+    <div class="d-flex">
 
+      
     @if (Model.BlogPostImages != null && Model.BlogPostImages.Count > 0)
     {
-        <img class="thumb" src="@Model.BlogPostImages[0].Image" alt="Blog Post Image">
-    }
+        <img class="thumb " src="@Model.BlogPostImages[0].Image" alt="Blog Post Image">
        
-</div>
-<div>
+    }
+        
+       <p class="m-4">@Model.Description</p>
+    </div>
+        <div>
+        <p class="mt-2 opacity-75">Publication Date: @Model.CreateDate</p>
+        <p class="mt-2 opacity-75">Creator: @Model.AppUser.UserName</p>
+        </div>
+    <hr />
+    <h3>Comments</h3>
+    <div class="row p-5">
+    @for (int i = 0; i < Model.blogPostComments.Count; i++)
+    {
+
+        
+        <div class="col-9 mx-2 p-3">
+        <h4>@Model.blogPostComments[i].User.UserName </h4>
+        <p>@Model.blogPostComments[i].Comment</p>
+        <p>Comment Date @Model.blogPostComments[i].CreateDate</p>
+                @if (User.Identity.IsAuthenticated)
+                {
+
+                @if (User.IsInRole("Admin") || int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)) == Model.blogPostComments[i].UserId)
+                {
+
+                    <a href="/Home/DeleteComment/@Model.blogPostComments[i].Id" class="btn btn-danger  text-light btn-rounded" style="color:white !important">Delete Comment</a>
+
+                }
+                }
+        </div>
+       <hr />
+        }
+        </div>
     @if (User.Identity.IsAuthenticated)
     {
-        
-    @if (User.IsInRole("Admin") || int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)) == Model.AppUserId)
-    {
-        
-        @Html.ActionLink("Edit", "Edit", new { /*id = Model.PrimaryKey */ })
-        @Html.ActionLink("Delete", "Delete", new { /* id = Model.PrimaryKey */ })
- 
-        }
+        @await Html.PartialAsync("CommentAdd", new BlogAspNetCore.Dtos.CreateComment(){
+            BlogPostId=Model.Id
+
+        });
+        <button id="yorumGonderBtn" class="btn btn-warning mx-2 my-3">Add Comment</button>
     }
-    <a asp-action="Index">Ana Sayfaya Dön</a>
+    <div>
+
+    </div>
+   
+    <div>
+        @if (User.Identity.IsAuthenticated)
+        {
+
+            @if (User.IsInRole("Admin") || int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)) == Model.AppUserId)
+            {
+
+                <a href="/Home/Edit/@Model.Id" class="btn btn-warning mx-2 text-light" style="color:white !important">Edit Blog</a>
+                <a href="/Home/Deleteblog/@Model.Id" class="btn btn-danger mx-2 text-light btn-rounded" style="color:white !important">Delete Blog</a>
+
+            }
+        }
+        <a class="btn btn-success" asp-action="Index">Home</a>
+    </div>
 </div>
+
+<script>
+    document.getElementById('yorumGonderBtn').addEventListener('click', function () {
+        document.getElementById('yorumYapmaBolumu').style.display = 'block';
+        document.getElementById('yorumGonderBtn').style.display = 'none';
+    });
+</script>
+
+
+ 

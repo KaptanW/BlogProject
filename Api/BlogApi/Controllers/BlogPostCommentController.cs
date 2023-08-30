@@ -33,6 +33,13 @@ namespace BlogApi.Controllers
             return Ok(json);
         }
 
+        [HttpGet("BlogPostCommentForblog/{id}")]
+        public async Task<IActionResult> BlogPostCommentForblog(int id)
+        {
+            var values = await _BlogPostCommentService.CommentsforBlog(id);
+            return Ok(values);
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddBlogPostComment(AddBlogPostCommentDto addBlogPostCommentDto)
         {
@@ -44,10 +51,10 @@ namespace BlogApi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBlogPostComment(int id)
         {
-            var values = await _BlogPostCommentService.GetById(id);
+            var value = await _BlogPostCommentService.GetById(id);
 
 
-            await _BlogPostCommentService.Delete(values);
+            await _BlogPostCommentService.Delete(value);
 
 
             return Ok();
@@ -60,6 +67,7 @@ namespace BlogApi.Controllers
             await _BlogPostCommentService.Update(values);
             return Ok();
         }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetBlogPostComment(int id)
         {
